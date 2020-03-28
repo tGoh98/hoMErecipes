@@ -1,0 +1,18 @@
+rdf = False
+cont = True
+
+i = 1
+while(cont):
+    querystring = {"p":f"{i}","i":reduce(lambda a,b: f"{a}, {b}", inp),"q":""}
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    if (response.status_code == 200):
+#         print(response)
+        toadddf = pd.DataFrame.from_dict(response.json()['results'])
+        print(f"page - {i}, response - {response}, len - {len(toadddf)}", end = '\r')
+        if len(toadddf) != 0:
+            rdf = pd.concat([rdf,toadddf]) if type(rdf) == pd.DataFrame else toadddf
+            i = i + 1
+        else:
+            cont = False
+    else:
+        i = i + 1
