@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+    <header id="header">
+        <div class="inner">
+            <!-- Logo -->
+            <a href="{{ url_for('index') }}" class="logo">
+                <span class="symbol"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span><span class="title">hoMErecipes</span>
+            </a>
+        </div>
+    </header>
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <header>
+                <h1>Results</h1>
+            </header>
+        </div>
+    </div>
+</div>
+{% endblock %}

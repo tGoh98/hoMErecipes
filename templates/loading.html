@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+    <header id="header">
+        <div class="inner">
+            <!-- Logo -->
+            <a href="{{ url_for('index') }}" class="logo">
+                <span class="symbol"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span><span class="title">hoMErecipes</span>
+            </a>
+        </div>
+    </header>
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+            <header>
+                <h1>Finding you the best recipes...</h1>
+            </header>
+            <section align="center">
+                <video maxWidth="320" height="240" autoplay loop muted>
+                  <source src="{{ url_for('static', filename='images/loadingHamster.mp4') }}" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <p>Loading...Please wait</p>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}
