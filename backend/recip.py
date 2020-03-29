@@ -86,7 +86,7 @@ def parseIngs(ser):
 def prf(self,d):
     gad = getattr(self,d)
     # print(type(gad),gad)
-    return gad if type(gad) != list else [g.name for g in gad]
+    return gad if type(gad) != list else [g.sname for g in gad]
 
 class Recipie:
 
@@ -173,6 +173,7 @@ class Ingredient:
         self.id = inp[0]
         self.link = inp[4]
         self.sname = inp[5]
+        # self.rname = sm.formatIng(self.name)
 
     def __str__(self):
         top = [a for a in dir(self) if a[0] != "_"]
