@@ -3,8 +3,10 @@ import pandas as pd
 from functools import reduce
 import requests
 import dill
-# import ray #ray
-from . import submatcher as sm 
+import ray #ray
+import submatcher as sm 
+import hashlib
+from os import path
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -14,12 +16,25 @@ headers = {
 class GetRecipies:
     
     def __init__(self, foodlist, recnum = 2):
-        self.foodlist = foodlist
         self.response = None
         self.responsedict = None
         self.recser = None
+        self.c = False
         self.rec = recnum
-        # self.get()
+        foodlist.sort()
+        self.foodlist = foodlist
+        s = reduce(lambda a,b: f"{a}, {b}", foodlist)
+        self.hash = int(hashlib.sha1(f"{self.rec}{s}".encode('utf-8')).hexdigest(), 16) % (10 ** 8)
+
+        if path.exists(f'c/{self.hash}.pkl'):
+        	print("Recipe cache found")
+        	dbfile = open(f'c/{self.hash}.pkl', 'rb') 
+        	self.response =  dill.load(dbfile)
+        	self.c = True
+        else:
+        	print("No recipe cache found")
+        	self.get()
+        self.process()
     
     def __str__(self):
         if (type(self.recser) != pd.DataFrame):
@@ -30,28 +45,24 @@ class GetRecipies:
         else:
             return "not yet gotten!"
     
-    def save(self):
-        if (type(self.recser) != pd.DataFrame):
-            self.recser.to_csv(f"gr{self.foodlist}.csv",header = True)
-            print ("dumped processed to csv")
-        elif (self.response):
-            with open('resp.pkl', 'wb') as f:
+    def save_res(self):
+        if (not self.c):
+            with open(f'c/{self.hash}.pkl', 'wb') as f:
                 dill.dump(self.response, f)
-            print ("dumped response to pickle")
-        else:
-            print ("nothing to save")
+            print ("dumped recipes to pickle")
 
     def get(self):
+        print(f"getting {self.foodlist} recipe")
         url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
         inpstr = reduce(lambda a,b: f"{a}, {b}", self.foodlist)
         querystring = {"number":f"{self.rec}","ranking":"1","ignorePantry":"false","ingredients":f"{inpstr}"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         self.response = response
-        self.process()
 
     def process(self):
         recipies = pd.DataFrame.from_dict(self.response.json())
         self.recser = recipies.apply(lambda r: Recipie(r),axis = 1,raw = False)
+        self.save_res()
    
     def to_json(self):
         full = {}
@@ -93,8 +104,20 @@ class Recipie:
         # self.unusedIngs = parseIngs(s.unusedIngredients)
         self.usedIngs = parseIngs(s.usedIngredients)
         self.response = None
+        self.c = False
 
-        self.getRecipie()
+
+        if path.exists(f'c/{self.id}.pkl'):
+        	print(f"recipe {self.name} cache found")
+        	dbfile = open(f'c/{self.id}.pkl', 'rb') 
+        	self.response =  dill.load(dbfile)
+        	self.c = True
+        else:
+        	print(f"No {self.name} cache found")
+        	self.getRecipie()
+
+        self.setVars()
+        self.save()
 
     def __str__(self):
 
@@ -115,15 +138,15 @@ class Recipie:
     
     # @ray.remote
     def getRecipie(self):
+        print(f"getting {self.name} recipe")
         url = f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/{self.id}/information"
         self.response = requests.request("GET", url, headers=headers)
-        self.setVars()
 
     def save(self):
-        if (self.response):
-            with open('respr.pkl', 'wb') as f:
+        if (not self.c):
+            with open(f'c/{self.id}.pkl', 'wb') as f:
                 dill.dump(self.response, f)
-            print ("dumped response to pickle")    
+            print (f"dumped {self.name} to pickle")    
 
     def setVars(self):
         rj = self.response.json()
