@@ -38,8 +38,8 @@ class GetRecipies:
             self.c = True
         else:
             print("No recipe cache found")
-            # self.get()
-            raise ValueError('yeehaw')
+            self.get()
+            # raise ValueError('yeehaw')
         self.process()
     
     def __str__(self):
