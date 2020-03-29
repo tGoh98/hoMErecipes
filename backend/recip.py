@@ -18,7 +18,7 @@ class GetRecipies:
     
     def __init__(self, foodlist, recnum = 2):
         if type(foodlist) == dict:
-            foodlist = list(foodlist.values)
+            foodlist = list(foodlist.values())
         self.response = None
         self.responsedict = None
         self.recser = None
