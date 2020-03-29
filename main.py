@@ -1,5 +1,6 @@
 # from backend import recip
 from flask import Flask, render_template, json, request, redirect, url_for
+from collections import defaultdict
 
 app = Flask(__name__)
 
@@ -42,13 +43,55 @@ def results():
         # allr = recip.GetRecipies(inp)
         # allr.to_json()
 
-        # TODO: REMOVE LOADING THIS CACHED FILE
+        # TODO: REMOVE LOADING THIS TEST FILE
         allr = json.load(open("backend/testout.json"))
 
-        
+        # Process data
+        allIng = defaultdict(dict)
+        foodSubs = defaultdict(dict)
+        missingno = defaultdict(dict)
 
-        return render_template("results.html")
+        for recipe in allr:
+                # allIng[recipe]["attrs"] = 0
+                # print(allIng[recipe])
+                # Attrs
+                allIng[recipe]["attrs"] = allr[recipe]["attrs"]
+                foodSubs[recipe]["attrs"] = allr[recipe]["attrs"]
+                missingno[recipe]["attrs"] = allr[recipe]["attrs"]
+
+                # Cuisines
+                allIng[recipe]["cuisines"] = allr[recipe]["cuisines"]
+                foodSubs[recipe]["cuisines"] = allr[recipe]["cuisines"]
+                missingno[recipe]["cuisines"] = allr[recipe]["cuisines"]
+
+                # Source url
+                allIng[recipe]["source"] = allr[recipe]["urls"]["source"]
+                foodSubs[recipe]["source"] = allr[recipe]["urls"]["source"]
+                missingno[recipe]["source"] = allr[recipe]["urls"]["source"]
+
+                # Image url
+                allIng[recipe]["img"] = allr[recipe]["urls"]["img"]
+                foodSubs[recipe]["img"] = allr[recipe]["urls"]["img"]
+                missingno[recipe]["img"] = allr[recipe]["urls"]["img"]
+
+                # Missed ingredients
+                missingno[recipe]["missedCount"] = allr[recipe]["missedCount"]
+                missingno[recipe]["missedIngs"] = allr[recipe]["missedCount"]
+
+                # Substituted ingredients
+                subMsg = ""
+                for origIng in allr[recipe]["subIngs"]:
+                        subMsg += origIng + " can be substituted with: "
+                        for subIng in allr[recipe]["subIngs"][origIng]:
+                                for subIngComp in allr[recipe]["subIngs"][origIng][subIng]:
+                                        subMsg += subIngComp + ", "
+                                
+                missingno[recipe]["subIngs"] = subMsg
 
 
+        return render_template("results.html", allIng=allIng, foodSubs=foodSubs, missingno=missingno)
+
+
+# TODO: change to prod
 if __name__ == '__main__':
     app.run(debug=True)
