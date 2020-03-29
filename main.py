@@ -5,10 +5,14 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-        # Submission
+        did_update = False
+
         if request.method == 'POST':
-                json.dump(request.form, open('selectedIng.json', 'w'))
-                return redirect(url_for('loading'))
+                if (len(request.form) <= 0):
+                        did_update = True
+                else :
+                        json.dump(request.form, open('selectedIng.json', 'w'))
+                        return redirect(url_for('loading'))
 
         dairyIng = json.load(open("db/dairyIngredients.txt", "r"))
         vegetablesIng = json.load(open("db/vegetablesIngredients.txt", "r"))
@@ -21,7 +25,7 @@ def index():
 
         return render_template("index.html", dairyIng=dairyIng, vegetablesIng=vegetablesIng,
                 proteinsIng=proteinsIng, fruitsIng=fruitsIng, bakingIng=bakingIng, 
-                oilsIng=oilsIng, nutsIng=nutsIng, sugarsIng=sugarsIng)
+                oilsIng=oilsIng, nutsIng=nutsIng, sugarsIng=sugarsIng, did_update=did_update)
 
 
 

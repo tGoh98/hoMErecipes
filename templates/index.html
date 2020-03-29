@@ -7,8 +7,8 @@
       // Remove
       var ulParent = document.getElementById("ingSel");
       var children = ulParent.children;
-      for (var i=0; i<children.length; i++) {
-        if (children[i].value == cb.value) {
+      for (var i=0; i<children.length; i++) {        
+        if (children[i].innerHTML === cb.value) {
           ulParent.removeChild(children[i]);
         }
       }
@@ -20,11 +20,8 @@
       document.getElementById("ingSel").appendChild(elem);
     }
   }
-  function addIng(elem) {
-    
-  }
-  function rmIng(ing) {
-
+  function clickMenu() {
+    document.getElementById("menuClick").click();
   }
 </script>
 {% endblock %}
@@ -45,64 +42,64 @@
 					<span class="symbol"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></span><span class="title">ho<span style="color: #f2849e">ME</span> recipes</span>
 				</a>
 
-				<!-- Nav -->
+        <!-- Nav -->
 				<nav>
-					<ul>
-						<li><a href="#menu">Menu</a></li>
-					</ul>
+          <ul>
+            <li><a href="#menu" id="menuClick">Menu</a></li>
+          </ul>
 				</nav>
-
+        
 			</div>
 		</header>
-
+    
 		<!-- Menu -->
 		<nav id="menu">
-			<h2>Ingredients Selected</h2>
+      <h2>Ingredients Selected</h2>
 			<ul id="ingSel">
-        <!-- <li><br><a href="{{ url_for('loading') }}" class="button primary fit">Start cooking!</a></li> -->
       </ul>
-            
 		</nav>
-
+    
 		<!-- Main -->
 		<div id="main">
-			<div class="inner">
-				<header>
+      <div class="inner">
+        <header>
           <h1>Welcome to hoME Recipes<br />
-               Stay home. Stay safe. Become a chef.&nbsp&nbsp<img src="{{ url_for('static', filename='images/coolEmoji.png') }}" style="max-width:50px;" alt="" /></h1>
-					<p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus
-						arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros
-						aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
-                </header>
+            Stay home. Stay safe. Become a chef.&nbsp&nbsp<img src="{{ url_for('static', filename='images/coolEmoji.png') }}" style="max-width:50px;" alt="" /></h1>
+            <p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus
+              arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros
+              aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
+            </header>
+            
+            <form method=post>
                 
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="dairy-tab" data-toggle="tab" href="#dairy" role="tab">Dairy <img src="{{ url_for('static', filename='images/dairyIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="vegetables-tab" data-toggle="tab" href="#vegetables" role="tab">Vegetables <img src="{{ url_for('static', filename='images/vegIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="proteins-tab" data-toggle="tab" href="#proteins" role="tab">Proteins <img src="{{ url_for('static', filename='images/proIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="fruits-tab" data-toggle="tab" href="#fruits" role="tab">Fruits <img src="{{ url_for('static', filename='images/fruitIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="baking-tab" data-toggle="tab" href="#baking" role="tab">Baking <img src="{{ url_for('static', filename='images/bakingIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="oils-tab" data-toggle="tab" href="#oils" role="tab">Oils & Sauces <img src="{{ url_for('static', filename='images/sauceIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="nuts-tab" data-toggle="tab" href="#nuts" role="tab">Nuts <img src="{{ url_for('static', filename='images/nutsIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="sugars-tab" data-toggle="tab" href="#sugars" role="tab">Sugars & Spices <img src="{{ url_for('static', filename='images/spiceIcon.png') }}" style="max-width:25px;" alt="" /></a>
-                    </li>
-                    
-                  </ul>
-                  <form method=post>
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="dairy-tab" data-toggle="tab" href="#dairy" role="tab">Dairy <img src="{{ url_for('static', filename='images/dairyIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="vegetables-tab" data-toggle="tab" href="#vegetables" role="tab">Vegetables <img src="{{ url_for('static', filename='images/vegIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="proteins-tab" data-toggle="tab" href="#proteins" role="tab">Proteins <img src="{{ url_for('static', filename='images/proIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="fruits-tab" data-toggle="tab" href="#fruits" role="tab">Fruits <img src="{{ url_for('static', filename='images/fruitIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="baking-tab" data-toggle="tab" href="#baking" role="tab">Baking <img src="{{ url_for('static', filename='images/bakingIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="oils-tab" data-toggle="tab" href="#oils" role="tab">Oils & Sauces <img src="{{ url_for('static', filename='images/sauceIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="nuts-tab" data-toggle="tab" href="#nuts" role="tab">Nuts <img src="{{ url_for('static', filename='images/nutsIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="sugars-tab" data-toggle="tab" href="#sugars" role="tab">Sugars & Spices <img src="{{ url_for('static', filename='images/spiceIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      
+                    </ul>
+                  
                     <div class="tab-content" id="myTabContent">
                       <br>
                       <div class="tab-pane fade show active" id="dairy" role="tabpanel">
@@ -157,7 +154,14 @@
 
                     <br>
                     <br>
-                    <input type="submit" class="button fit" value="Start Cooking!">
+                    <button type="button" class="button default fit" onclick="clickMenu()">Review ingredients</button>
+                    <br>
+                    <br>
+                    <input type="submit" class="button primary fit" value="Start Cooking!">
+                    <br>
+                    {% if did_update %}
+                        <p style="color: red; padding-top: 0.5em">You must select at least one ingredient!</p>
+                    {% endif %}
                   </form>
 	      </div>
       </div>
