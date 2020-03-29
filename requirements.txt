@@ -4,3 +4,4 @@ numpy
 requests
 dill
 ray
+bs4
