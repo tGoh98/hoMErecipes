@@ -11,15 +11,466 @@
             <a href="{{ url_for('index') }}" class="logo">
                 <span class="symbol"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span><span class="title">hoMErecipes</span>
             </a>
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <h2>Filter by...</h2>
+        <ul>
+            <li>Home</li>
+            <li>Ipsum veroeros</li>
+            <li>Tempus etiam</li>
+            <li>Consequat dolor</li>
+            <li>Elements</li>
+            <li><br><a href="{{ url_for('loading') }}" class="button primary fit">Filter!</a></li>
+        </ul>
+        
+    </nav>
+        
     <!-- Main -->
     <div id="main">
         <div class="inner">
             <header>
                 <h1>Results</h1>
             </header>
-        </div>
+
+        <!-- nav bar -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="complete-tab" data-toggle="tab" href="#complete" role="tab">complete</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="substitution-tab" data-toggle="tab" href="#substitution" role="tab">substitution</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="missing-tab" data-toggle="tab" href="#missing" role="tab">missing</a>
+            </li>
+        </ul>
+
+          <!-- content -->
+          <div class="tab-content" id="myTabContent">
+              <br>
+            <div class="tab-pane fade show active" id="complete" role="tabpanel">
+                <section class="tiles">
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Magna</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Lorem</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style3">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic03.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Feugiat</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style4">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic04.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Tempus</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style5">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic05.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Aliquam</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style6">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic06.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Veroeros</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic07.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Ipsum</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style3">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic08.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Dolor</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic09.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Nullam</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style5">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic10.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Ultricies</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style6">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic11.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Dictum</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style4">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic12.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Pretium</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                </section>
+            </div>
+            <div class="tab-pane fade" id="substitution" role="tabpanel">
+                <section class="tiles">
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Magna</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Lorem</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style3">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic03.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Feugiat</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style4">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic04.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Tempus</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style5">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic05.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Aliquam</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style6">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic06.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Veroeros</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic07.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Ipsum</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style3">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic08.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Dolor</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic09.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Nullam</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style5">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic10.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Ultricies</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style6">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic11.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Dictum</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style4">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic12.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Pretium</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                </section>
+            </div>
+            <div class="tab-pane fade" id="missing" role="tabpanel">
+                <section class="tiles">
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic01.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Magna</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic02.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Lorem</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style3">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic03.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Feugiat</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style4">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic04.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Tempus</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style5">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic05.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Aliquam</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style6">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic06.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Veroeros</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style2">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic07.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Ipsum</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style3">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic08.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Dolor</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style1">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic09.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Nullam</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style5">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic10.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Ultricies</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style6">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic11.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Dictum</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="style4">
+                        <span class="image">
+                            <img src="{{ url_for('static', filename='images/pic12.jpg') }}" alt="" />
+                        </span>
+                        <a href="generic.html">
+                            <h2>Pretium</h2>
+                            <div class="content">
+                                <p>Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.</p>
+                            </div>
+                        </a>
+                    </article>
+                </section>
+            </div>
+          </div>
+          </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% endblock %}
