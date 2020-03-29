@@ -1,6 +1,18 @@
 {
-    "Vegetarian" : false,
-    "Vegan" : false,
-    "Gluten Free" : false,
-    "Dairy Free" : false
+    "Vegetarian" : {
+        "isChecked": false,
+        "attrName": "vegetarian"
+    },
+    "Vegan" : {
+        "isChecked": false,
+        "attrName": "vegan"
+    },
+    "Gluten Free" : {
+        "isChecked": false,
+        "attrName": "glutenFree"
+    },
+    "Dairy Free" : {
+        "isChecked": false,
+        "attrName": "dairyFree"
+    }
 }

@@ -41,13 +41,15 @@ def results():
         attrsDict = json.load(open("db/attrsDict.json"))
 
         if (request.method == 'POST'):
-                filterList = set([])
-                for fil in request.form.values():
-                        filterList.add(fil.lower().replace(" ", ""))
+                attrList = set([])
+                cuList = set([])
+                for fil in request.form.keys():
                         if fil in cuisinesDict:
                                 cuisinesDict[fil] = True
+                                cuList.add(fil)
                         if fil in attrsDict:
-                                attrsDict[fil] = True
+                                attrsDict[fil]["isChecked"] = True
+                                attrList.add(fil)
 
                 # Process data with filters (no space, lower case)
                 allIng = defaultdict(dict)
@@ -57,12 +59,18 @@ def results():
                 allr = json.load(open("allRecipes.json", "r"))
 
                 for recipe in allr:
-                        for attr in allr[recipe]["attrs"]:
-                                if attr.lower().replace(" ", "") in filterList:
-                                        continue
-                        for cu in allr[recipe]["cuisines"]:
-                                if cu.lower().replace(" ", "") in filterList:
-                                        continue
+                        skip = False
+                        for attr in attrList:
+                                if not attrsDict[attr]["isChecked"] or not allr[recipe]["attrs"][attrsDict[attr]["attrName"]]:
+                                        skip = True
+                                        break
+                        if not skip:
+                                for cu in cuList:
+                                        if not cuisinesDict[cu] or cu not in allr[recipe]["cuisines"]:
+                                                skip = True
+                                                break
+                        if skip:
+                                continue
                         if (allr[recipe]["missedCount"] == 0):
                                 # allIng
                                 allIng[recipe]["attrs"] = allr[recipe]["attrs"]

@@ -24,14 +24,14 @@
     <nav id="menu">
         <form method=post>
             <h2>Filter by...</h2>
-            <div style="font-size: 20px;">Dietary restriction<br><br></div>
-            <ul>
+            <div style="font-size: 20px;">Dietary restriction<br></div>
+            <ul style="list-style-type: none;">
                 {% for attr in attrsDict %}
                 <li style="padding-top: 13px">
-                    {% if attrsDict[attr] %}
+                    {% if attrsDict[attr]['isChecked'] %}
                         <input type="checkbox" id="{{ attr }}" name="{{ attr }}" value="{{ attr }}" checked>
                     {% endif %}
-                    {% if not attrsDict[attr] %}
+                    {% if not attrsDict[attr]['isChecked'] %}
                         <input type="checkbox" id="{{ attr }}" name="{{ attr }}" value="{{ attr }}">
                     {% endif %}
                         <label for="{{ attr }}" style="color: white">{{ attr }}</label>
@@ -39,8 +39,8 @@
                 {% endfor %}
             </ul>
             
-            <div style="font-size: 20px;">Cuisine<br><br></div>
-            <ul>
+            <div style="font-size: 20px;">Cuisine<br></div>
+            <ul style="list-style-type: none;">
                 {% for cuisine in cuisinesDict %}
                 <li style="padding-top: 13px">
                     {% if cuisinesDict[cuisine] %}
