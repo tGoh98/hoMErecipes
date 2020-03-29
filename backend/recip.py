@@ -3,8 +3,8 @@ import pandas as pd
 from functools import reduce
 import requests
 import dill
-import ray #ray
-import submatcher as sm 
+# import ray #ray
+from . import submatcher as sm 
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
