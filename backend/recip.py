@@ -4,6 +4,7 @@ from functools import reduce
 import requests
 import dill
 import ray #ray
+import submatcher as sm 
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -11,11 +12,15 @@ headers = {
             }
 
 class GetRecipies:
-    def __init__(self, foodlist):
+    
+    def __init__(self, foodlist, recnum = 2):
         self.foodlist = foodlist
         self.response = None
         self.responsedict = None
         self.recser = None
+        self.rec = recnum
+        self.get()
+    
     def __str__(self):
         if (type(self.recser) != pd.DataFrame):
             print(self.recser)
@@ -24,6 +29,7 @@ class GetRecipies:
             return f" {self.response.status_code} not yet processed!"
         else:
             return "not yet gotten!"
+    
     def save(self):
         if (type(self.recser) != pd.DataFrame):
             self.recser.to_csv(f"gr{self.foodlist}.csv",header = True)
@@ -38,22 +44,41 @@ class GetRecipies:
     def get(self):
         url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
         inpstr = reduce(lambda a,b: f"{a}, {b}", self.foodlist)
-        querystring = {"number":"2","ranking":"1","ignorePantry":"false","ingredients":f"{inpstr}"}
+        querystring = {"number":f"{self.rec}","ranking":"1","ignorePantry":"false","ingredients":f"{inpstr}"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         self.response = response
+        self.process()
+
     def process(self):
         recipies = pd.DataFrame.from_dict(self.response.json())
         self.responsedict = recipies
         self.recser = self.responsedict.apply(lambda r: Recipie(r),axis = 1,raw = False)
+   
+    def to_json(self):
+        full = {}
+        for i in range(len(self.recser)):
+            r = self.recser.iloc[i]
+            full[r.name] = r.to_json()
+        return full
+
+
 
 dct = ['id', 'amount', 'unit', 'originalString', 'image', 'name']
+
 parseIngDict = lambda ld: [[d[i] for i in dct] for d in ld]
+
 def parseIngs(ser):
     psed = parseIngDict(ser)
     # print(ser ,"\n\n\n")
     return [Ingredient(d) for d in psed]
 
+def prf(self,d):
+    gad = getattr(self,d)
+    # print(type(gad),gad)
+    return gad if type(gad) != list else [g.name for g in gad]
+
 class Recipie:
+
     def __init__(self, s):   
         '''
         Class built to hold and host a recipie from spoonacular API
@@ -69,18 +94,21 @@ class Recipie:
         # self.unusedIngs = parseIngs(s.unusedIngredients)
         self.usedIngs = parseIngs(s.usedIngredients)
         self.response = None
+
+        self.getRecipie()
+
     def __str__(self):
+
         top = [a for a in dir(self) if not a in dir(Recipie)]
         
-        def prf(d):
-            gad = getattr(self,d)
-            # print(type(gad),gad)
-            return gad if type(gad) != list else [g.name for g in gad]
-
-        topl = [f"{d} - {prf(d)}" for d in top]
+        topl = [f"{d} - {prf(self,d)}" for d in top]
         for l in topl:
             print(l)
         return ""
+    
+    def to_json(self):
+        top = [a for a in dir(self) if not a in dir(Recipie)]
+        return {d:prf(self,d) for d in top}
     
     # @ray.remote
     def getRecipie(self):
@@ -104,8 +132,10 @@ class Recipie:
         self.serving = rj['servings']
         self.cuisines = np.array(rj['cuisines'])
         # self.summary = rj['summary']
+        self.subIngs = sm.takeIngs(self.missedIngs)
         
 class Ingredient:
+
     '''
     Class built to hold and host an Ingredient from spoonacular API
     '''
@@ -116,6 +146,7 @@ class Ingredient:
         self.id = inp[0]
         self.link = inp[4]
         self.sname = inp[5]
+
     def __str__(self):
         top = [a for a in dir(self) if a[0] != "_"]
         topl = [f"{d} - {getattr(self,d)}" for d in top]
