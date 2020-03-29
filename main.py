@@ -52,45 +52,54 @@ def results():
         missingno = defaultdict(dict)
 
         for recipe in allr:
-                # Attrs
-                allIng[recipe]["attrs"] = allr[recipe]["attrs"]
-                foodSubs[recipe]["attrs"] = allr[recipe]["attrs"]
-                missingno[recipe]["attrs"] = allr[recipe]["attrs"]
+                if (allr[recipe]["missedCount"] == 0):
+                        # allIng
+                        allIng[recipe]["attrs"] = allr[recipe]["attrs"]
+                        allIng[recipe]["cuisines"] = allr[recipe]["cuisines"]
+                        allIng[recipe]["source"] = allr[recipe]["urls"]["source"]
+                        allIng[recipe]["img"] = allr[recipe]["urls"]["img"]
+                        
+                        # Used ingredients
+                        tempStr = ""
+                        for ing in allr[recipe]["usedIngs"]:
+                                tempStr += ing + ", "
+                        allIng[recipe]["usedIngs"] = tempStr.strip(", ")
 
-                # Cuisines
-                allIng[recipe]["cuisines"] = allr[recipe]["cuisines"]
-                foodSubs[recipe]["cuisines"] = allr[recipe]["cuisines"]
-                missingno[recipe]["cuisines"] = allr[recipe]["cuisines"]
+                else:
+                        # missingno
+                        missingno[recipe]["attrs"] = allr[recipe]["attrs"]
+                        missingno[recipe]["cuisines"] = allr[recipe]["cuisines"]
+                        missingno[recipe]["source"] = allr[recipe]["urls"]["source"]
+                        missingno[recipe]["img"] = allr[recipe]["urls"]["img"]
+                        # Missed ingredients
+                        missingno[recipe]["missedCount"] = allr[recipe]["missedCount"]
+                        missingStr = ""
+                        for ing in allr[recipe]["missedIngs"]:
+                                missingStr += ing + ", "
+                        missingno[recipe]["missedIngs"] = missingStr.strip(", ")
+                
+                # # Attrs
+                # foodSubs[recipe]["attrs"] = allr[recipe]["attrs"]
 
-                # Source url
-                allIng[recipe]["source"] = allr[recipe]["urls"]["source"]
-                foodSubs[recipe]["source"] = allr[recipe]["urls"]["source"]
-                missingno[recipe]["source"] = allr[recipe]["urls"]["source"]
+                # # Cuisines
+                # foodSubs[recipe]["cuisines"] = allr[recipe]["cuisines"]
 
-                # Image url
-                allIng[recipe]["img"] = allr[recipe]["urls"]["img"]
-                foodSubs[recipe]["img"] = allr[recipe]["urls"]["img"]
-                missingno[recipe]["img"] = allr[recipe]["urls"]["img"]
+                # # Source url
+                # foodSubs[recipe]["source"] = allr[recipe]["urls"]["source"]
 
-                # Used ingredients
-                tempStr = ""
-                for ing in allr[recipe]["usedIngs"]:
-                        tempStr += ing + ", "
-                allIng[recipe]["usedIngs"] = tempStr.strip(", ")
+                # # Image url
+                # foodSubs[recipe]["img"] = allr[recipe]["urls"]["img"]
 
-                # Missed ingredients
-                missingno[recipe]["missedCount"] = allr[recipe]["missedCount"]
-                missingno[recipe]["missedIngs"] = allr[recipe]["missedCount"]
 
-                # Substituted ingredients
-                subMsg = ""
-                for origIng in allr[recipe]["subIngs"]:
-                        subMsg += origIng + " can be substituted with: "
-                        for subIng in allr[recipe]["subIngs"][origIng]:
-                                for subIngComp in allr[recipe]["subIngs"][origIng][subIng]:
-                                        subMsg += subIngComp + ", "
+                # # Substituted ingredients
+                # subMsg = ""
+                # for origIng in allr[recipe]["subIngs"]:
+                #         subMsg += origIng + " can be substituted with: "
+                #         for subIng in allr[recipe]["subIngs"][origIng]:
+                #                 for subIngComp in allr[recipe]["subIngs"][origIng][subIng]:
+                #                         subMsg += subIngComp + ", "
                                 
-                missingno[recipe]["subIngs"] = subMsg.strip(", ")
+                # subIng[recipe]["subIngs"] = subMsg.strip(", ")
 
         return render_template("results.html", allIng=allIng, foodSubs=foodSubs, missingno=missingno)
 
