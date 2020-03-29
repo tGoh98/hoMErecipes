@@ -20,7 +20,8 @@ def formatIng(i):
 def makesubdict(l):
     req  = requests.get(l)
     data = req.text
-    soup = BeautifulSoup(data,features="lxml")
+    # soup = BeautifulSoup(data, features="lxml")
+    soup = BeautifulSoup(data, "lxml")
     t = soup.findAll("div", {"class":"component table"})
 
     nt = soup.findAll('table')[0]

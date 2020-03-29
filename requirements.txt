@@ -3,5 +3,5 @@ pandas
 numpy
 requests
 dill
-ray
 bs4
+lxml
