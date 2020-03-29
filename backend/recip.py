@@ -6,12 +6,12 @@ import dill
 import ray #ray
 import hashlib
 from os import path
-from . import submatcher as sm
-# import submatcher as sm
+# from . import submatcher as sm
+import submatcher as sm
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-            'x-rapidapi-key': "835dfd2493msh9a6e806e0741499p1e8849jsn25d0d49eed92"
+            'x-rapidapi-key': "36357043e8mshaa0c1e478e70a31p1f2fcbjsn685828de63a8"
             }
 
 class GetRecipies:
@@ -25,6 +25,7 @@ class GetRecipies:
         self.c = False
         self.rec = recnum
         foodlist.sort()
+        foodlist = [i.lower() for i in foodlist]
         self.foodlist = foodlist
         s = reduce(lambda a,b: f"{a}, {b}", foodlist)
         self.hash = int(hashlib.sha1(f"{self.rec}{s}".encode('utf-8')).hexdigest(), 16) % (10 ** 8)
@@ -61,7 +62,7 @@ class GetRecipies:
         querystring = {"number":f"{self.rec}","ranking":"1","ignorePantry":"true","ingredients":f"{inpstr}"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         if response.status_code != 200:
-            raise ValueError('Incorrect Response - check API key')
+            raise ValueError(f'Incorrect Response - check API key {response.status_code}')
         self.response = response
 
     def process(self):
@@ -146,7 +147,7 @@ class Recipie:
         print(f"getting {self.name} recipe")
         url = f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/{self.id}/information"
         self.response = requests.request("GET", url, headers=headers)
-        if response.status_code != 200:
+        if self.response.status_code != 200:
             raise ValueError('Incorrect Response - check API key')
 
     def save(self):
