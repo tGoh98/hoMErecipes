@@ -1,7 +1,7 @@
 # Home Recipes
 
 Since the COVID-19 pandemic began, the real risk of encountering coronavirus in public areas such as stores means it’s often best to avoid grocery shopping unless it’s absolutely necessary, especially for elderly or otherwise immunocompromised individuals. Home Recipes was created to help you find recipes for the ingredients you already have at home so that you can push off that grocery store trip a little bit longer while still making delicious food.
-[(presentation and demo link ADD THIS)](https://www.youtube.com)
+Watch the [Demo Video](https://www.youtube.com/watch?v=8nKci7h8wNw&feature=youtu.be)!
  
 ## Features
 * Web framework set up with Flask
