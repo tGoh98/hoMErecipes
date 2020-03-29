@@ -22,16 +22,39 @@
 
     <!-- Menu -->
     <nav id="menu">
-        <h2>Filter by...</h2>
-        <ul>
-            <li>Home</li>
-            <li>Ipsum veroeros</li>
-            <li>Tempus etiam</li>
-            <li>Consequat dolor</li>
-            <li>Elements</li>
-            <li><br><a href="{{ url_for('loading') }}" class="button primary fit">Filter Results!</a></li>
-        </ul>
-        
+        <form method=post>
+            <h2>Filter by...</h2>
+            <div style="font-size: 20px;">Dietary restriction<br><br></div>
+            <ul>
+                {% for attr in attrsDict %}
+                <li style="padding-top: 13px">
+                    {% if attrsDict[attr] %}
+                        <input type="checkbox" id="{{ attr }}" name="{{ attr }}" value="{{ attr }}" checked>
+                    {% endif %}
+                    {% if not attrsDict[attr] %}
+                        <input type="checkbox" id="{{ attr }}" name="{{ attr }}" value="{{ attr }}">
+                    {% endif %}
+                        <label for="{{ attr }}" style="color: white">{{ attr }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <div style="font-size: 20px;">Cuisine<br><br></div>
+            <ul>
+                {% for cuisine in cuisinesDict %}
+                <li style="padding-top: 13px">
+                    {% if cuisinesDict[cuisine] %}
+                        <input type="checkbox" id="{{ cuisine }}" name="{{ cuisine }}" value="{{ cuisine }}" checked>
+                    {% endif %}
+                    {% if not cuisinesDict[cuisine] %}
+                        <input type="checkbox" id="{{ cuisine }}" name="{{ cuisine }}" value="{{ cuisine }}">
+                    {% endif %}
+                    <label for="{{ cuisine }}" style="color: white">{{ cuisine }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+            <input type="submit" class="button primary fit" value="Filter!">
+        </form>
     </nav>
         
     <!-- Main -->
