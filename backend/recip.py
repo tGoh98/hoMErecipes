@@ -19,7 +19,7 @@ class GetRecipies:
         self.responsedict = None
         self.recser = None
         self.rec = recnum
-        self.get()
+        # self.get()
     
     def __str__(self):
         if (type(self.recser) != pd.DataFrame):
@@ -51,8 +51,7 @@ class GetRecipies:
 
     def process(self):
         recipies = pd.DataFrame.from_dict(self.response.json())
-        self.responsedict = recipies
-        self.recser = self.responsedict.apply(lambda r: Recipie(r),axis = 1,raw = False)
+        self.recser = recipies.apply(lambda r: Recipie(r),axis = 1,raw = False)
    
     def to_json(self):
         full = {}
@@ -107,8 +106,12 @@ class Recipie:
         return ""
     
     def to_json(self):
-        top = [a for a in dir(self) if not a in dir(Recipie)]
-        return {d:prf(self,d) for d in top}
+        dr = dir(Recipie)
+        dr.append('response')
+        top = [a for a in dir(self) if not a in dr]
+        di = {d:prf(self,d) for d in top}
+        di['cuisines'] = di['cuisines'].tolist()
+        return di
     
     # @ray.remote
     def getRecipie(self):
