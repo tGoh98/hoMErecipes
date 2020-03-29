@@ -1,4 +1,4 @@
-from backend import recip
+# from backend import recip
 from flask import Flask, render_template, json, request, redirect, url_for
 
 app = Flask(__name__)
@@ -37,9 +37,15 @@ def loading():
 @app.route('/results')
 def results():
         # Get recipes
-        inp = json.load(open("selectedIng.json", "r"))
-        allr = recip.GetRecipies(inp)
-        allr.to_json()
+        # TODO: UNCOMMENT THIS WHEN IMPORT WORKS
+        # inp = json.load(open("selectedIng.json", "r"))
+        # allr = recip.GetRecipies(inp)
+        # allr.to_json()
+
+        # TODO: REMOVE LOADING THIS CACHED FILE
+        allr = json.load(open("backend/testout.json"))
+
+        
 
         return render_template("results.html")
 
