@@ -35,11 +35,11 @@
 
 		<!-- Header -->
 		<header id="header">
-			<div class="inner">
+			<div class="inner" style="margin-bottom: -20px">
 
 				<!-- Logo -->
 				<a href="{{ url_for('index') }}" class="logo">
-					<span class="symbol"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></span><span class="title">ho<span style="color: #f2849e">ME</span> recipes</span>
+					<span class="symbol"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></span><span class="title" style="font-size: 14pt;">ho<span style="color: #f2849e">ME</span> recipes</span>
 				</a>
 
         <!-- Nav -->
@@ -63,16 +63,14 @@
 		<div id="main">
       <div class="inner">
         <header>
-          <h1>Welcome to hoME Recipes<br />
-            Stay home. Stay safe. Become a chef.&nbsp&nbsp<img src="{{ url_for('static', filename='images/chefEmoji.png') }}" style="max-width:65px;" alt="" /></h1>
-            <p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus
-              arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros
-              aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
+          <h1>
+            Stay home. Stay safe. Start cooking.&nbsp&nbsp<img src="{{ url_for('static', filename='images/chefEmoji.png') }}" style="max-width:65px;" alt="" /></h1>
+            <p>Hi there! Since the COVID-19 pandemic began, the real risk of encountering coronavirus in public areas such as stores means it’s often best to avoid grocery shopping unless it’s absolutely necessary, especially for elderly or otherwise immunocompromised individuals. Home Recipes was created to help you find recipes for the ingredients you already have at home so that you can push off that grocery store trip a little bit longer while still making delicious food.
+              <br><br>To begin, select the ingredients that you have on hand from the categories listed below. Next, review your ingredients to ensure that they are the ones you’d like to use today. Finally, get ready to start cooking as we help find you recipes to dishes that you can make with what you have on hand!</p>
             </header>
             
             <form method=post>
-                
-                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #e7e7e7;">
                       <li class="nav-item">
                         <a class="nav-link active" id="dairy-tab" data-toggle="tab" href="#dairy" role="tab">Dairy <img src="{{ url_for('static', filename='images/dairyIcon.png') }}" style="max-width:25px;" alt="" /></a>
                       </li>
@@ -97,10 +95,9 @@
                       <li class="nav-item">
                         <a class="nav-link" id="sugars-tab" data-toggle="tab" href="#sugars" role="tab">Sugars & Spices <img src="{{ url_for('static', filename='images/spiceIcon.png') }}" style="max-width:25px;" alt="" /></a>
                       </li>
-                      
                     </ul>
                   
-                    <div class="tab-content" id="myTabContent">
+                    <div class="tab-content" id="myTabContent" style="background-color: #f4f4f4; padding: 0px 15px 5px 15px;">
                       <br>
                       <div class="tab-pane fade show active" id="dairy" role="tabpanel">
                         {% for ing in dairyIng %}

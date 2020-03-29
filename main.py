@@ -36,6 +36,11 @@ def loading():
 
 @app.route('/results')
 def results():
+        # Get recipes
+        inp = json.load(open("selectedIng.json", "r"))
+        allr = recip.GetRecipies(inp)
+        allr.to_json()
+
         return render_template("results.html")
 
 
