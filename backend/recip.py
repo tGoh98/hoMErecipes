@@ -4,9 +4,10 @@ from functools import reduce
 import requests
 import dill
 import ray #ray
-import submatcher as sm 
 import hashlib
 from os import path
+# from . import submatcher as sm
+import submatcher as sm
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -55,7 +56,7 @@ class GetRecipies:
         print(f"getting {self.foodlist} recipe")
         url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients"
         inpstr = reduce(lambda a,b: f"{a}, {b}", self.foodlist)
-        querystring = {"number":f"{self.rec}","ranking":"1","ignorePantry":"false","ingredients":f"{inpstr}"}
+        querystring = {"number":f"{self.rec}","ranking":"1","ignorePantry":"true","ingredients":f"{inpstr}"}
         response = requests.request("GET", url, headers=headers, params=querystring)
         self.response = response
 
