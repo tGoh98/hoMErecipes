@@ -1,3 +1,3 @@
 window.onload = function() {
-    setTimeout(function() { window.location.href = '/results'; }, 1000);
+    setTimeout(function() { window.location.href = '/results'; }, 5000);
 };
