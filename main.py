@@ -116,7 +116,7 @@ def results():
                 # Get recipes
                 # TODO: UNCOMMENT THIS WHEN IMPORT WORKS
                 inp = json.load(open("selectedIng.json", "r"))
-                allr = recip.GetRecipies(inp)
+                allr = recip.GetRecipies(inp,recnum = 9)
                 allr.to_json()
 
                 # TODO: REMOVE LOADING THIS TEST FILE

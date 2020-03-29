@@ -6,8 +6,9 @@ import dill
 # import ray #ray
 import hashlib
 from os import path
-# from . import submatcher as sm
-import submatcher as sm
+from . import submatcher as sm
+# import submatcher as sm
+pathtocache = "backend/c/"
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -30,14 +31,15 @@ class GetRecipies:
         s = reduce(lambda a,b: f"{a}, {b}", foodlist)
         self.hash = int(hashlib.sha1(f"{self.rec}{s}".encode('utf-8')).hexdigest(), 16) % (10 ** 8)
 
-        if path.exists(f'c/{self.hash}.pkl'):
-        	print("Recipe cache found")
-        	dbfile = open(f'c/{self.hash}.pkl', 'rb') 
-        	self.response =  dill.load(dbfile)
-        	self.c = True
+        if path.exists(f'{pathtocache}{self.hash}.pkl'):
+            print("Recipe cache found")
+            dbfile = open(f'{pathtocache}{self.hash}.pkl', 'rb') 
+            self.response =  dill.load(dbfile)
+            self.c = True
         else:
-        	print("No recipe cache found")
-        	self.get()
+            print("No recipe cache found")
+            # self.get()
+            raise ValueError('yeehaw')
         self.process()
     
     def __str__(self):
@@ -51,7 +53,7 @@ class GetRecipies:
     
     def save_res(self):
         if (not self.c):
-            with open(f'c/{self.hash}.pkl', 'wb') as f:
+            with open(f'{pathtocache}{self.hash}.pkl', 'wb') as f:
                 dill.dump(self.response, f)
             print ("dumped recipes to pickle")
 
@@ -113,14 +115,14 @@ class Recipie:
         self.c = False
 
 
-        if path.exists(f'c/{self.id}.pkl'):
-        	print(f"CACHE FOUND - {self.name} ")
-        	dbfile = open(f'c/{self.id}.pkl', 'rb') 
-        	self.response =  dill.load(dbfile)
-        	self.c = True
+        if path.exists(f'{pathtocache}{self.id}.pkl'):
+            print(f"CACHE FOUND - {self.name} ")
+            dbfile = open(f'{pathtocache}{self.id}.pkl', 'rb') 
+            self.response =  dill.load(dbfile)
+            self.c = True
         else:
-        	print(f"CACHE NOT FOUND - {self.name}")
-        	self.getRecipie()
+            print(f"CACHE NOT FOUND - {self.name}")
+            self.getRecipie()
 
         self.setVars()
         self.save()
@@ -152,7 +154,7 @@ class Recipie:
 
     def save(self):
         if (not self.c):
-            with open(f'c/{self.id}.pkl', 'wb') as f:
+            with open(f'{pathtocache}{self.id}.pkl', 'wb') as f:
                 dill.dump(self.response, f)
             print (f"   dumped {self.name} to pickle")    
 
