@@ -1,0 +1,1 @@
+[ "Almond", "Cashew", "Hazelnut", "Macadamia", "Nutella", "Peanut", "Peanut Butter", "Pecan", "Pine Nut", "Pistachio", "Walnut" ]

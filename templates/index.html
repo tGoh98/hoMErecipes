@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<script>
+  function handleClick(cb) {
+    if (cb.checked == false) {
+      // Remove
+      var ulParent = document.getElementById("ingSel");
+      var children = ulParent.children;
+      for (var i=0; i<children.length; i++) {        
+        if (children[i].innerHTML === cb.value) {
+          ulParent.removeChild(children[i]);
+        }
+      }
+    } else {
+      // Add
+      var elem = document.createElement('li');
+      elem.innerHTML = cb.value;
+      elem.setAttribute("id", `li${cb.value}`);
+      document.getElementById("ingSel").appendChild(elem);
+    }
+  }
+  function clickMenu() {
+    document.getElementById("menuClick").click();
+  }
+</script>
 {% endblock %}
 
 
@@ -12,105 +35,135 @@
 
 		<!-- Header -->
 		<header id="header">
-			<div class="inner">
+			<div class="inner" style="margin-bottom: -20px">
 
 				<!-- Logo -->
 				<a href="{{ url_for('index') }}" class="logo">
-					<span class="symbol"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span><span class="title">hoMErecipes</span>
+					<span class="symbol"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></span><span class="title" style="font-size: 14pt;">ho<span style="color: #f2849e">ME</span> recipes</span>
 				</a>
 
-				<!-- Nav -->
+        <!-- Nav -->
 				<nav>
-					<ul>
-						<li><a href="#menu">Menu</a></li>
-					</ul>
+          <ul>
+            <li><a href="#menu" id="menuClick">Menu</a></li>
+          </ul>
 				</nav>
-
+        
 			</div>
 		</header>
-
+    
 		<!-- Menu -->
 		<nav id="menu">
-			<h2>Ingredients Selected</h2>
-			<ul>
-				<li>Home</li>
-				<li>Ipsum veroeros</li>
-				<li>Tempus etiam</li>
-				<li>Consequat dolor</li>
-                <li>Elements</li>
-                <li><br><a href="{{ url_for('loading') }}" class="button primary fit">Start cooking!</a></li>
-            </ul>
-            
+      <h2>Ingredients Selected</h2>
+			<ul id="ingSel">
+      </ul>
 		</nav>
-
+    
 		<!-- Main -->
 		<div id="main">
-			<div class="inner">
-				<header>
-					<h1>This is Phantom, a free, fully responsive site<br />
-						template designed by <a href="http://html5up.net">HTML5 UP</a>.</h1>
-					<p>Etiam quis viverra lorem, in semper lorem. Sed nisl arcu euismod sit amet nisi euismod sed cursus
-						arcu elementum ipsum arcu vivamus quis venenatis orci lorem ipsum et magna feugiat veroeros
-						aliquam. Lorem ipsum dolor sit amet nullam dolore.</p>
-                </header>
-                
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                      <a class="nav-link active" id="dairy-tab" data-toggle="tab" href="#dairy" role="tab">Dairy</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="vegetables-tab" data-toggle="tab" href="#vegetables" role="tab">Vegetables</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="proteins-tab" data-toggle="tab" href="#proteins" role="tab">Proteins</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="fruits-tab" data-toggle="tab" href="#fruits" role="tab">fruits</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="baking-tab" data-toggle="tab" href="#baking" role="tab">baking</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="oils-tab" data-toggle="tab" href="#oils" role="tab">oils</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="nuts-tab" data-toggle="tab" href="#nuts" role="tab">nuts</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" id="sugars-tab" data-toggle="tab" href="#sugars" role="tab">sugars</a>
-                    </li>
-                    
-                  </ul>
-                  <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="dairy" role="tabpanel">
-                        dairy
-                    </div>
-                    <div class="tab-pane fade" id="vegetables" role="tabpanel">
-                        vegetables
-                    </div>
-                    <div class="tab-pane fade" id="proteins" role="tabpanel">
-                        proteins
-                    </div>
-                    <div class="tab-pane fade" id="fruits" role="tabpanel">
-                        fruits
-                    </div>
-                    <div class="tab-pane fade" id="baking" role="tabpanel">
-                        baking
-                    </div>
-                    <div class="tab-pane fade" id="oils" role="tabpanel">
-                        oils
-                    </div>
-                    <div class="tab-pane fade" id="nuts" role="tabpanel">
-                        nuts
-                    </div>
-                    <div class="tab-pane fade" id="sugars" role="tabpanel">
-                        sugars
+      <div class="inner">
+        <header>
+          <h1>
+            Stay home. Stay safe. Start cooking.&nbsp&nbsp<img src="{{ url_for('static', filename='images/chefEmoji.png') }}" style="max-width:65px;" alt="" />
+          </h1>
+          <p>Hi there! Since the COVID-19 pandemic began, the real risk of encountering coronavirus in public areas such as stores means it’s often best to avoid grocery shopping unless it’s absolutely necessary, especially for elderly or otherwise immunocompromised individuals. Home Recipes was created to help you find recipes for the ingredients you already have at home so that you can push off that grocery store trip a little bit longer while still making delicious food.
+            <br><br>To begin, select the ingredients that you have on hand from the categories listed below. Next, review your ingredients to ensure that they are the ones you’d like to use today. Finally, get ready to start cooking as we help find you recipes to dishes that you can make with what you have on hand!
+          </p>
+        </header>
+            
+            <form method=post>
+                  <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #e7e7e7;">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="dairy-tab" data-toggle="tab" href="#dairy" role="tab">Dairy <img src="{{ url_for('static', filename='images/dairyIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="vegetables-tab" data-toggle="tab" href="#vegetables" role="tab">Vegetables <img src="{{ url_for('static', filename='images/vegIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="proteins-tab" data-toggle="tab" href="#proteins" role="tab">Proteins <img src="{{ url_for('static', filename='images/proIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="fruits-tab" data-toggle="tab" href="#fruits" role="tab">Fruits <img src="{{ url_for('static', filename='images/fruitIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="baking-tab" data-toggle="tab" href="#baking" role="tab">Baking <img src="{{ url_for('static', filename='images/bakingIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="oils-tab" data-toggle="tab" href="#oils" role="tab">Oils & Sauces <img src="{{ url_for('static', filename='images/sauceIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="nuts-tab" data-toggle="tab" href="#nuts" role="tab">Nuts <img src="{{ url_for('static', filename='images/nutsIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="sugars-tab" data-toggle="tab" href="#sugars" role="tab">Sugars & Spices <img src="{{ url_for('static', filename='images/spiceIcon.png') }}" style="max-width:25px;" alt="" /></a>
+                      </li>
+                    </ul>
+                  
+                    <div class="tab-content" id="myTabContent" style="background-color: #f4f4f4; padding: 0px 15px 5px 15px;">
+                      <br>
+                      <div class="tab-pane fade show active" id="dairy" role="tabpanel">
+                        {% for ing in dairyIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="vegetables" role="tabpanel">
+                        {% for ing in vegetablesIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="proteins" role="tabpanel">
+                        {% for ing in proteinsIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="fruits" role="tabpanel">
+                        {% for ing in fruitsIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="baking" role="tabpanel">
+                        {% for ing in bakingIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="oils" role="tabpanel">
+                        {% for ing in oilsIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="nuts" role="tabpanel">
+                        {% for ing in nutsIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
+                      <div class="tab-pane fade" id="sugars" role="tabpanel">
+                        {% for ing in sugarsIng %}
+                          <input type="checkbox" id="{{ ing }}" name="{{ ing }}" value="{{ ing }}" onclick='handleClick(this);'>
+                          <label for="{{ ing }}">{{ ing }}</label>
+                        {% endfor %}
+                      </div>
                     </div>
 
-                  </div>
-				
-			</div>
-        </div>
+                    <br>
+                    <br>
+                    <button type="button" class="button default fit" onclick="clickMenu()">Review ingredients</button>
+                    <br>
+                    <br>
+                    <input type="submit" class="button primary fit" value="Start Cooking!">
+                    <br>
+                    {% if did_update %}
+                        <p style="color: red; padding-top: 0.5em">You must select at least one ingredient!</p>
+                    {% endif %}
+                  </form>
+	      </div>
+      </div>
         
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

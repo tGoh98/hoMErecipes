@@ -10,7 +10,7 @@
         <div class="inner">
             <!-- Logo -->
             <a href="{{ url_for('index') }}" class="logo">
-                <span class="symbol"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span><span class="title">hoMErecipes</span>
+                <span class="symbol"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></span><span class="title" style="font-size: 14pt;">ho<span style="color: #f2849e">ME</span> recipes</span>
             </a>
         </div>
     </header>
@@ -18,11 +18,11 @@
     <div id="main">
         <div class="inner">
             <header>
-                <h1>Finding you the best recipes...</h1>
+                <h1>Searching the entire internet for the best recipes...</h1>
             </header>
             <section align="center">
-                <video maxWidth="320" height="240" autoplay loop muted>
-                  <source src="{{ url_for('static', filename='images/loadingHamster.mp4') }}" type="video/mp4" />
+                <video maxWidth="500" maxHeight="500" autoplay loop muted>
+                  <source src="{{ url_for('static', filename='images/Ham_stays_safe.mp4') }}" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <p>Loading...Please wait</p>

@@ -9,17 +9,156 @@
         <div class="inner">
             <!-- Logo -->
             <a href="{{ url_for('index') }}" class="logo">
-                <span class="symbol"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span><span class="title">hoMErecipes</span>
+                <span class="symbol"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="" /></span><span class="title" style="font-size: 14pt;">ho<span style="color: #f2849e">ME</span> recipes</span>
             </a>
+            <!-- Nav -->
+            <nav>
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <form method=post>
+            <h2>Filter by...</h2>
+            <div style="font-size: 20px;">Dietary restriction<br></div>
+            <ul style="list-style-type: none;">
+                {% for attr in attrsDict %}
+                <li style="padding-top: 13px">
+                    {% if attrsDict[attr]['isChecked'] %}
+                        <input type="checkbox" id="{{ attr }}" name="{{ attr }}" value="{{ attr }}" checked>
+                    {% endif %}
+                    {% if not attrsDict[attr]['isChecked'] %}
+                        <input type="checkbox" id="{{ attr }}" name="{{ attr }}" value="{{ attr }}">
+                    {% endif %}
+                        <label for="{{ attr }}" style="color: white">{{ attr }}</label>
+                    </li>
+                {% endfor %}
+            </ul>
+            
+            <div style="font-size: 20px;">Cuisine<br></div>
+            <ul style="list-style-type: none;">
+                {% for cuisine in cuisinesDict %}
+                <li style="padding-top: 13px">
+                    {% if cuisinesDict[cuisine] %}
+                        <input type="checkbox" id="{{ cuisine }}" name="{{ cuisine }}" value="{{ cuisine }}" checked>
+                    {% endif %}
+                    {% if not cuisinesDict[cuisine] %}
+                        <input type="checkbox" id="{{ cuisine }}" name="{{ cuisine }}" value="{{ cuisine }}">
+                    {% endif %}
+                    <label for="{{ cuisine }}" style="color: white">{{ cuisine }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+            <input type="submit" class="button primary fit" value="Filter!">
+        </form>
+    </nav>
+        
     <!-- Main -->
     <div id="main">
         <div class="inner">
             <header>
-                <h1>Results</h1>
+                <h1>We selected these recipes for you</h1>
+                <p>Below you can see a 3 different categories of recipes. "All ingredients" shows the recipes where you 
+                    have all the necessary ingredients. "Food substitutions" means that you are missing a few ingredients, but 
+                    you have a common substitute for those foods (see <a href="https://www.allrecipes.com/article/common-ingredient-substitutions/" target="_blank">here</a> for a list of food substitutes). "Missing ingredients" 
+                    are the dishes that you are just one or two ingredients short. <br>
+                    Click the menu on the top right to filter the results to your needs.
+                </p>
             </header>
-        </div>
+
+        <!-- nav bar -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #e7e7e7;">
+            <li class="nav-item">
+                <a class="nav-link active" id="complete-tab" data-toggle="tab" href="#complete" role="tab">All ingredients</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="substitution-tab" data-toggle="tab" href="#substitution" role="tab">Food substitutions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="missing-tab" data-toggle="tab" href="#missing" role="tab">Missing ingredients</a>
+            </li>
+        </ul>
+
+          <!-- content -->
+          <div class="tab-content" id="myTabContent" style="background-color: #f4f4f4; padding: 0px 15px 15px 15px;">
+              <br>
+            <div class="tab-pane fade show active" id="complete" role="tabpanel">
+                <section class="tiles">
+                    {% for recipe in allIng %}
+                        <article>
+                            <span class="image">
+                                <img src="{{ allIng[recipe]['img'] }}" alt="" />
+                            </span>
+                            <a href="{{ allIng[recipe]['source'] }}" target="_blank">
+                                <h2>{{ recipe }}</h2>
+                                <div class="content">
+                                    Ingredients used: {{ allIng[recipe]['usedIngs'] }}
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                    
+                </section>
+                {% if allIng|length == 0 %}
+                    <br>
+                    <p style="margin-bottom: 1em;">No recipes with all ingredients present could be found. Try selecting 
+                        more ingredients next time. Or maybe free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="substitution" role="tabpanel">
+                <section class="tiles">
+                    {% for recipe in foodSubs %}
+                        <article>
+                            <span class="image">
+                                <img src="{{ foodSubs[recipe]['img'] }}" alt="" />
+                            </span>
+                            <a href="{{ foodSubs[recipe]['source'] }}" target="_blank">
+                                <h2>{{ recipe }}</h2>
+                                <div class="content">
+                                    {{ foodSubs[recipe]['subIngs'] }}
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </section>
+                {% if foodSubs|length == 0 %}
+                    <br>
+                    <p style="margin-bottom: 1em;">No recipes with food substitutions could be found. Try selecting 
+                        more ingredients next time. Or maybe free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
+                {% endif %}
+            </div>
+            <div class="tab-pane fade" id="missing" role="tabpanel">
+                <section class="tiles">
+                    {% for recipe in missingno %}
+                        <article>
+                            <span class="image">
+                                <img src="{{ missingno[recipe]['img'] }}" alt="" />
+                            </span>
+                            <a href="{{ missingno[recipe]['source'] }}" target="_blank">
+                                <h2>{{ recipe }}</h2>
+                                <div class="content">
+                                    Missing {{ missingno[recipe]['missedCount'] }} ingredients: {{ missingno[recipe]['missedIngs'] }}
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+                </section>
+                {% if missingno|length == 0 %}
+                    <br>
+                    <p style="margin-bottom: 1em;">No recipes with only a few ingredients missing could be found. Try selecting 
+                        more ingredients next time. Or maybe free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
+                {% endif %}
+            </div>
+          </div>
+          </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% endblock %}

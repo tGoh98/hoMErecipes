@@ -1,0 +1,1 @@
+[ "Fruit Jam / Preservatives", "Dried Fruit", "Fruit Juices", "Apple", "Banana", "Berries (general)", "Blackberry", "Blueberry", "Cherry", "Coconut", "Cranberry", "Date", "Grapefruit", "Grape", "Kiwi", "Lemon", "Lime", "Melon", "Mango", "Orange", "Peach", "Pear", "Pineapple", "Plantain", "Pomegranate", "Raisin", "Raspberry", "Strawberry", "Watermelon" ]

@@ -1,0 +1,1 @@
+[ "Bacon", "Beans", "Beef", "Chicken", "Chickpeas", "Deli Meats", "Egg", "Fish (general)", "Ground Meats (general)", "Ham", "Lamb", "Legumes", "Meat Balls", "Pork", "Salmon", "Sausage", "Shellfish (general)", "Shrimp", "Tuna", "Turkey" ]
