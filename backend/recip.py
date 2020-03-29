@@ -6,8 +6,8 @@ import dill
 import ray #ray
 import hashlib
 from os import path
-from . import submatcher as sm
-# import submatcher as sm
+# from . import submatcher as sm
+import submatcher as sm
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -60,6 +60,8 @@ class GetRecipies:
         inpstr = reduce(lambda a,b: f"{a}, {b}", self.foodlist)
         querystring = {"number":f"{self.rec}","ranking":"1","ignorePantry":"true","ingredients":f"{inpstr}"}
         response = requests.request("GET", url, headers=headers, params=querystring)
+        if response.status_code != 200:
+            raise ValueError('Incorrect Response - check API key')
         self.response = response
 
     def process(self):
@@ -144,6 +146,8 @@ class Recipie:
         print(f"getting {self.name} recipe")
         url = f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/{self.id}/information"
         self.response = requests.request("GET", url, headers=headers)
+        if response.status_code != 200:
+            raise ValueError('Incorrect Response - check API key')
 
     def save(self):
         if (not self.c):
