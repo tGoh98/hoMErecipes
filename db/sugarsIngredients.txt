@@ -1,0 +1,1 @@
+[ "Allspice", "Brown Sugar", "Bay Leaf", "Cayenne", "Cinnamon", "Corn Syrup", "Cumin", "Powdered Sugar", "Honey", "Maple Syrup", "Molasses", "Pepper", "Red Pepper Flakes", "Rosemary", "Salt", "Sugar", "Vanilla Extract" ]
