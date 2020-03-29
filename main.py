@@ -115,12 +115,12 @@ def results():
                 
                 # Get recipes
                 # TODO: UNCOMMENT THIS WHEN IMPORT WORKS
-                # inp = json.load(open("selectedIng.json", "r"))
-                # allr = recip.GetRecipies(inp)
-                # allr.to_json()
+                inp = json.load(open("selectedIng.json", "r"))
+                allr = recip.GetRecipies(inp)
+                allr.to_json()
 
                 # TODO: REMOVE LOADING THIS TEST FILE
-                allr = json.load(open("backend/testout.json"))
+                # allr = json.load(open("backend/testout.json"))
 
                 # Save working copy for filtering
                 json.dump(allr, open("allRecipes.json", "w"))
