@@ -6,8 +6,8 @@ import dill
 # import ray #ray
 import hashlib
 from os import path
-from . import submatcher as sm
-# import submatcher as sm
+# from . import submatcher as sm
+import submatcher as sm
 
 headers = {
             'x-rapidapi-host': "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -114,12 +114,12 @@ class Recipie:
 
 
         if path.exists(f'c/{self.id}.pkl'):
-        	print(f"recipe {self.name} cache found")
+        	print(f"CACHE FOUND - {self.name} ")
         	dbfile = open(f'c/{self.id}.pkl', 'rb') 
         	self.response =  dill.load(dbfile)
         	self.c = True
         else:
-        	print(f"No {self.name} cache found")
+        	print(f"CACHE NOT FOUND - {self.name}")
         	self.getRecipie()
 
         self.setVars()
@@ -144,7 +144,7 @@ class Recipie:
     
     # @ray.remote
     def getRecipie(self):
-        print(f"getting {self.name} recipe")
+        print(f"    getting {self.name} recipe")
         url = f"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/{self.id}/information"
         self.response = requests.request("GET", url, headers=headers)
         if self.response.status_code != 200:
@@ -154,7 +154,7 @@ class Recipie:
         if (not self.c):
             with open(f'c/{self.id}.pkl', 'wb') as f:
                 dill.dump(self.response, f)
-            print (f"dumped {self.name} to pickle")    
+            print (f"   dumped {self.name} to pickle")    
 
     def setVars(self):
         rj = self.response.json()
