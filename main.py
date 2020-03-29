@@ -52,8 +52,6 @@ def results():
         missingno = defaultdict(dict)
 
         for recipe in allr:
-                # allIng[recipe]["attrs"] = 0
-                # print(allIng[recipe])
                 # Attrs
                 allIng[recipe]["attrs"] = allr[recipe]["attrs"]
                 foodSubs[recipe]["attrs"] = allr[recipe]["attrs"]
@@ -74,6 +72,12 @@ def results():
                 foodSubs[recipe]["img"] = allr[recipe]["urls"]["img"]
                 missingno[recipe]["img"] = allr[recipe]["urls"]["img"]
 
+                # Used ingredients
+                tempStr = ""
+                for ing in allr[recipe]["usedIngs"]:
+                        tempStr += ing + ", "
+                allIng[recipe]["usedIngs"] = tempStr.strip(", ")
+
                 # Missed ingredients
                 missingno[recipe]["missedCount"] = allr[recipe]["missedCount"]
                 missingno[recipe]["missedIngs"] = allr[recipe]["missedCount"]
@@ -86,8 +90,7 @@ def results():
                                 for subIngComp in allr[recipe]["subIngs"][origIng][subIng]:
                                         subMsg += subIngComp + ", "
                                 
-                missingno[recipe]["subIngs"] = subMsg
-
+                missingno[recipe]["subIngs"] = subMsg.strip(", ")
 
         return render_template("results.html", allIng=allIng, foodSubs=foodSubs, missingno=missingno)
 
