@@ -58,7 +58,6 @@ def results():
                         allIng[recipe]["cuisines"] = allr[recipe]["cuisines"]
                         allIng[recipe]["source"] = allr[recipe]["urls"]["source"]
                         allIng[recipe]["img"] = allr[recipe]["urls"]["img"]
-                        
                         # Used ingredients
                         tempStr = ""
                         for ing in allr[recipe]["usedIngs"]:
@@ -78,28 +77,21 @@ def results():
                                 missingStr += ing + ", "
                         missingno[recipe]["missedIngs"] = missingStr.strip(", ")
                 
-                # # Attrs
-                # foodSubs[recipe]["attrs"] = allr[recipe]["attrs"]
-
-                # # Cuisines
-                # foodSubs[recipe]["cuisines"] = allr[recipe]["cuisines"]
-
-                # # Source url
-                # foodSubs[recipe]["source"] = allr[recipe]["urls"]["source"]
-
-                # # Image url
-                # foodSubs[recipe]["img"] = allr[recipe]["urls"]["img"]
-
-
-                # # Substituted ingredients
-                # subMsg = ""
-                # for origIng in allr[recipe]["subIngs"]:
-                #         subMsg += origIng + " can be substituted with: "
-                #         for subIng in allr[recipe]["subIngs"][origIng]:
-                #                 for subIngComp in allr[recipe]["subIngs"][origIng][subIng]:
-                #                         subMsg += subIngComp + ", "
-                                
-                # subIng[recipe]["subIngs"] = subMsg.strip(", ")
+                        # foodSubs
+                        foodSubs[recipe]["attrs"] = allr[recipe]["attrs"]
+                        foodSubs[recipe]["cuisines"] = allr[recipe]["cuisines"]
+                        foodSubs[recipe]["source"] = allr[recipe]["urls"]["source"]
+                        foodSubs[recipe]["img"] = allr[recipe]["urls"]["img"]
+                        # Substituted ingredients
+                        subMsg = ""
+                        for origIng in allr[recipe]["subIngs"]:
+                                subMsg += origIng + " can be substituted with: "
+                                for subIng in allr[recipe]["subIngs"][origIng]:
+                                        for subIngComp in allr[recipe]["subIngs"][origIng][subIng]:
+                                                subMsg += subIngComp + ", "
+                                subMsg += "\n"
+                                        
+                        foodSubs[recipe]["subIngs"] = subMsg.strip(", ")
 
         return render_template("results.html", allIng=allIng, foodSubs=foodSubs, missingno=missingno)
 

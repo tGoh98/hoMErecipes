@@ -39,9 +39,9 @@
         <div class="inner">
             <header>
                 <h1>We selected these recipes for you</h1>
-                <p>Below you can see a 3 different categories of recipes. "All ingredients present" shows the recipes where you 
-                    have all the necessary ingredients. "Food substitutions made" means that you are missing a few ingredients, but 
-                    you have a common substitute for those foods (see <a href="https://www.allrecipes.com/article/common-ingredient-substitutions/" target="_blank">here</a> for a list of food substitutes). "Missing a few ingredients" 
+                <p>Below you can see a 3 different categories of recipes. "All ingredients" shows the recipes where you 
+                    have all the necessary ingredients. "Food substitutions" means that you are missing a few ingredients, but 
+                    you have a common substitute for those foods (see <a href="https://www.allrecipes.com/article/common-ingredient-substitutions/" target="_blank">here</a> for a list of food substitutes). "Missing ingredients" 
                     are the dishes that you are just one or two ingredients short. <br>
                     Click the menu on the top right to filter the results to your needs.
                 </p>
@@ -50,13 +50,13 @@
         <!-- nav bar -->
         <ul class="nav nav-tabs" id="myTab" role="tablist" style="background-color: #e7e7e7;">
             <li class="nav-item">
-                <a class="nav-link active" id="complete-tab" data-toggle="tab" href="#complete" role="tab">All ingredients present</a>
+                <a class="nav-link active" id="complete-tab" data-toggle="tab" href="#complete" role="tab">All ingredients</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="substitution-tab" data-toggle="tab" href="#substitution" role="tab">Food substitutions made</a>
+                <a class="nav-link" id="substitution-tab" data-toggle="tab" href="#substitution" role="tab">Food substitutions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="missing-tab" data-toggle="tab" href="#missing" role="tab">Missing a few ingredients</a>
+                <a class="nav-link" id="missing-tab" data-toggle="tab" href="#missing" role="tab">Missing ingredients</a>
             </li>
         </ul>
 
@@ -82,7 +82,8 @@
                 </section>
                 {% if allIng|length == 0 %}
                     <br>
-                    <p style="margin-bottom: 1em;">No recipes with all ingredients present could be found. Free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
+                    <p style="margin-bottom: 1em;">No recipes with all ingredients present could be found. Try selecting 
+                        more ingredients next time. Or maybe free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
                 {% endif %}
             </div>
             <div class="tab-pane fade" id="substitution" role="tabpanel">
@@ -103,7 +104,8 @@
                 </section>
                 {% if foodSubs|length == 0 %}
                     <br>
-                    <p style="margin-bottom: 1em;">No recipes with food substitutions could be found. Free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
+                    <p style="margin-bottom: 1em;">No recipes with food substitutions could be found. Try selecting 
+                        more ingredients next time. Or maybe free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
                 {% endif %}
             </div>
             <div class="tab-pane fade" id="missing" role="tabpanel">
@@ -124,7 +126,8 @@
                 </section>
                 {% if missingno|length == 0 %}
                     <br>
-                    <p style="margin-bottom: 1em;">No recipes with only a few ingredients missing could be found. Free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
+                    <p style="margin-bottom: 1em;">No recipes with only a few ingredients missing could be found. Try selecting 
+                        more ingredients next time. Or maybe free tier couldn't get enough results <img src="{{ url_for('static', filename='images/tearEmoji.png') }}" style="max-height: 30px;" alt="" /></p>
                 {% endif %}
             </div>
           </div>
