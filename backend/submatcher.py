@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import requests
+import re
 
 def makesubdict(l):
     req  = requests.get(l)
@@ -18,7 +19,23 @@ def makesubdict(l):
     tbdf = pd.DataFrame(tabletext)
     tbdf.columns = ["from","tou"]
     #colsmax = max(tbdf['tou'].map(lambda x: x.count("OR")))
-    tbdf['tof'] = tbdf['tou'].map(lambda x: x.split("OR"))
+    tbdf['toff'] = tbdf['tou'].map(lambda x: x.split("OR"))
+    def formatIng(i):
+        ri = re.sub(r'\b\d[/\d().\- ]*(cup|teaspoon|grams|ounces|ounce|tablespoon)?s?[\) of]*', "", i)
+        ri = re.sub(r'  ',"",ri)
+        ri = re.sub(r'--'," ",ri)
+        ri = re.sub(r'\(([\S ])*\)', '', ri)
+        ri = re.sub(r'reduce[\S ]*','',ri)
+        ri = re.sub(r':[\S ]*','',ri)
+        ri = re.sub(r'enough'," ",ri)
+        ri = re.sub(r'to make'," ",ri)
+        ri = re.sub(r'  ',"",ri)
+    #     print(i,"||",ri)
+        return ri
+
+    tbdf['tof'] = tbdf['toff'].map(lambda x:[formatIng(i) for i in x])
+
+
     tbdf['from'] = tbdf['from'].map(lambda x: x.lower().replace("-"," "))
     return tbdf
 
